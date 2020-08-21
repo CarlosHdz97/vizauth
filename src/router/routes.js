@@ -18,7 +18,8 @@ const routes = [
     path: '/auth',
     component: () => import('layouts/AccountLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Auth/Login.vue') }
+      { path: '', component: () => import('pages/Auth/Login.vue') },
+      { path: 'password', component: () => import('pages/Auth/Password.vue') }
     ]
   },
 
