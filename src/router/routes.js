@@ -17,10 +17,11 @@ const routes = [
   },
   {
     path: '/auth',
-    component: () => import('layouts/AccountLayout.vue'),
+    component: () => import('layouts/AuthLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Auth/Login.vue') },
-      { path: 'password', component: () => import('pages/Auth/Password.vue') }
+      { path: 'password', component: () => import('pages/Auth/Password.vue') },
+      { path: 'recoveryPassword', component: () => import('pages/Auth/RecoveryPassword.vue') }
     ]
   },
 
