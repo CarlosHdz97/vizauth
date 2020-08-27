@@ -1,23 +1,26 @@
 <template>
     <q-page>
-        <div class="row items-center q-py-md q-px-md">
-            <div class="col-12 text-center">
-                <q-avatar class="shadow-4" size="80px">
-                    <img src="https://cdn.quasar.dev/img/avatar.png">
-                </q-avatar>
+        <div class="row justify-center q-pa-md relative-position">
+            <div class="col-12 col-md-4 text-center">
+                <q-avatar class="shadow-3" size="80px" icon="person" text-color="white" color="black" />
+                    <!-- <img src="https://cdn.quasar.dev/img/avatar.png">
+                </q-avatar> -->
                 <div class="text-h6">Carlos Hernández</div>
-                <div class="text-caption">ADMINISTRADOR</div>
+                <div class="text-weight-bold">ADMINISTRADOR</div>
                 <q-select dense outlined color="grey" v-model="wp" :options="workpoints" option-value="id" option-label="name" class="q-px-xl"/>
+                <q-btn icon="exit_to_app" class="absolute-top-right" flat rounded size="lg" />
             </div>
         </div>
-        <div class="row q-col-gutter-lg justify-center">
-            <div class="col-5" v-for="module in modules" :key="module.name">
-                <q-card>
-                    <q-card-section class="text-center">
-                        <q-avatar :color="module.color" :text-color="module.text" :icon="module.icon"/> <!-- insert_photo -->
-                        <div class="text-subtitle2">{{module.name}}</div>
-                    </q-card-section>
-                </q-card>
+        <div class="row justify-center">
+            <div class="col-12 col-md-11 row q-col-gutter-md justify-center">
+                <div class="col-5 col-md-2" v-for="module in modules" :key="module.name">
+                    <q-card>
+                        <q-card-section class="text-center">
+                            <q-avatar :color="module.color" :text-color="module.text" :icon="module.icon"/> <!-- insert_photo -->
+                            <div class="text-subtitle2">{{module.name}}</div>
+                        </q-card-section>
+                    </q-card>
+                </div>
             </div>
         </div>
     </q-page>
