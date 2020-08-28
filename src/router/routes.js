@@ -24,6 +24,13 @@ const routes = [
       { path: 'recoveryPassword', component: () => import('pages/Auth/RecoveryPassword.vue') }
     ]
   },
+  {
+    path: '/support',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Support/Index.vue') }
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it

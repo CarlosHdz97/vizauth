@@ -1,107 +1,67 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
+  <q-layout view="hHh LpR fff">
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+    <q-header bordered class="bg-white text-black">
+        <q-toolbar class="row justify-between">
+            <div class="col-1 text-left">
+                <q-btn dense flat round icon="apps" @click="left = !left" />
+            </div>
 
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
+            <q-toolbar-title class="col-6 col-md-2 text-weight-bold text-center">
+                <q-select dense borderless v-model="workpoint" :options="workpoints" option-value="id" option-label="name"/>
+            </q-toolbar-title>
+
+            <div class="col-1 text-right">
+                <q-btn dense flat round icon="exit_to_app"/>
+            </div>
+        </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
+    <q-drawer v-model="left" side="left" :width="250" bordered><!-- show-if-above -->
+        <q-list class="q-pa-sm">
+            <q-item clickable v-ripple v-for="module in modules" :key="module.name">
+                <q-item-section avatar>
+                <!-- <q-icon :color="module.text" :name="module.icon" /> -->
+                <q-icon color="black" :name="module.icon" />
+                </q-item-section>
+                <q-item-section>{{module.name}}</q-item-section>
+            </q-item>
+        </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="bg-grey-1">
       <router-view />
     </q-page-container>
+
   </q-layout>
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksData = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
-
 export default {
-  name: 'MainLayout',
-  components: { EssentialLink },
-  data () {
-    return {
-      leftDrawerOpen: false,
-      essentialLinks: linksData
+    data () {
+        return {
+            left: false,
+            modules: [
+                {'name': 'Usuarios', 'icon': 'people_alt', 'color': 'cyan-1', 'text': 'cyan-6', 'path': '/account'},
+                {'name': 'Soporte', 'icon': 'support', 'color': 'deep-purple-1', 'text': 'deep-purple-10', 'path': '/suport'},
+                {'name': 'Productos', 'icon': 'trip_origin', 'color': 'blue-grey-1', 'text': 'blue-grey-9', 'path': '/products'},
+                {'name': 'Inventarios', 'icon': 'view_module', 'color': 'pink-1', 'text': 'pink-9', 'path': '/inventory'},
+                {'name': 'Almacen', 'icon': 'bento', 'color': 'yellow-1', 'text': 'yellow-10', 'path': '/celler'},
+                {'name': 'Etiquetas', 'icon': 'local_offer', 'color': 'light-green-1', 'text': 'light-green-9', 'path': '/labels'},
+                {'name': 'Preventa', 'icon': 'shopping_bag', 'color': 'teal-1', 'text': 'teal-9', 'path': '/preSale'},
+                {'name': 'Punto de venta', 'icon': 'store', 'color': 'orange-1', 'text': 'orange-10', 'path': '/sale'},
+            ],
+            workpoints: [
+                {'id': 1, 'name': 'CEDIS SAN PABLO'},
+                {'id': 2, 'name': 'CEDIS PANTACO'},
+                {'id': 3, 'name': 'SAN PABLO 1'},
+                {'id': 4, 'name': 'SAN PABLO 2'},
+                {'id': 5, 'name': 'SAN PABLO 3'},
+                {'id': 6, 'name': 'CORREO 1'},
+                {'id': 7, 'name': 'CORREO 2'},
+            ],
+            workpoint: {'id': 4, 'name': 'SAN PABLO 2'},
+        }
     }
-  }
 }
 </script>
