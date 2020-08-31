@@ -1,10 +1,10 @@
 <template>
-  <q-layout view="hHh LpR fff">
+  <q-layout view="hHR LpR fff">
 
     <q-header bordered class="bg-white text-black">
         <q-toolbar class="row justify-between">
             <div class="col-1 text-left">
-                <q-btn dense flat round icon="apps" @click="left = !left" />
+                <q-btn dense flat round icon="apps" :to="{path: '/'}"  /> <!-- @click="left = !left" -->
             </div>
 
             <q-toolbar-title class="col-6 col-md-2 text-weight-bold text-center">
@@ -12,7 +12,8 @@
             </q-toolbar-title>
 
             <div class="col-1 text-right">
-                <q-btn dense flat round icon="exit_to_app"/>
+                <!-- <q-btn dense flat round icon="exit_to_app"/> -->
+                <q-btn dense flat round icon="settings" @click="right = !right" />
             </div>
         </q-toolbar>
     </q-header>
@@ -28,6 +29,10 @@
             </q-item>
         </q-list>
     </q-drawer>
+    
+    <q-drawer v-model="right" side="right" bordered>
+        <router-view name="settings"/>
+    </q-drawer>
 
     <q-page-container class="bg-grey-1">
       <router-view />
@@ -41,6 +46,7 @@ export default {
     data () {
         return {
             left: false,
+            right: false,
             modules: [
                 {'name': 'Usuarios', 'icon': 'people_alt', 'color': 'cyan-1', 'text': 'cyan-6', 'path': '/account'},
                 {'name': 'Soporte', 'icon': 'support', 'color': 'deep-purple-1', 'text': 'deep-purple-10', 'path': '/suport'},

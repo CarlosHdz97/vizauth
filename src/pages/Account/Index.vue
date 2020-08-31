@@ -14,7 +14,7 @@
         <div class="row justify-center">
             <div class="col-12 col-md-11 row q-col-gutter-md justify-center">
                 <div class="col-5 col-md-2" v-for="module in modules" :key="module.name">
-                    <q-card>
+                    <q-card @click="changeUrl(module.path)" style="cursor:pointer;" clickable v-ripple>
                         <q-card-section class="text-center">
                             <q-avatar :color="module.color" :text-color="module.text" :icon="module.icon"/> <!-- insert_photo -->
                             <div class="text-subtitle2">{{module.name}}</div>
@@ -32,8 +32,8 @@ export default {
   data () {
       return {
             modules: [
-                {'name': 'Usuarios', 'icon': 'people_alt', 'color': 'cyan-1', 'text': 'cyan-6', 'path': '/account'},
-                {'name': 'Soporte', 'icon': 'support', 'color': 'deep-purple-1', 'text': 'deep-purple-10', 'path': '/suport'},
+                {'name': 'Usuarios', 'icon': 'people_alt', 'color': 'cyan-1', 'text': 'cyan-6', 'path': '/users'},
+                {'name': 'Soporte', 'icon': 'support', 'color': 'deep-purple-1', 'text': 'deep-purple-10', 'path': '/support'},
                 {'name': 'Productos', 'icon': 'trip_origin', 'color': 'blue-grey-1', 'text': 'blue-grey-9', 'path': '/products'},
                 {'name': 'Inventarios', 'icon': 'view_module', 'color': 'pink-1', 'text': 'pink-9', 'path': '/inventory'},
                 {'name': 'Almacen', 'icon': 'bento', 'color': 'yellow-1', 'text': 'yellow-10', 'path': '/celler'},
@@ -51,7 +51,12 @@ export default {
                 {'id': 7, 'name': 'CORREO 2'},
             ],
             wp : null,
-      }
-  }
+        }
+    },
+    methods: {
+        changeUrl(url){
+            this.$router.push({'path' : url});
+        }
+    }
 }
 </script>

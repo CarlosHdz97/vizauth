@@ -1,4 +1,4 @@
-
+//const indexSupport import('pages/Support/Index.vue')
 const routes = [
   {
     path: '/',
@@ -9,7 +9,7 @@ const routes = [
   },
   {
     path: '/users',
-    component: () => import('layouts/AccountLayout.vue'),
+    component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Account/Users.vue') },
       { path: 'create', component: () => import('pages/Account/Create.vue') }
@@ -27,9 +27,14 @@ const routes = [
   {
     path: '/support',
     component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Support/Index.vue') }
-    ]
+    children: [{ 
+      path: '',
+      /* component: () => import('pages/Support/Index.vue') */ 
+      components: {
+        default : () => import('pages/Support/Index.vue'),
+        settings : () => import('components/Support/Config.vue')
+      }
+    }]
   },
 
   // Always leave this as last one,
