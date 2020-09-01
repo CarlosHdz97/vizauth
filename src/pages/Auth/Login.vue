@@ -13,7 +13,7 @@
                         <q-icon :name="showingPassword ? 'visibility' : 'visibility_off'" class="cursor-pointer" @click="showingPassword = !showingPassword"/>
                     </template>
                 </q-input>
-                <div class="text-overline text-grey-7">Olvide mi contraseña</div>
+                <q-btn class="text-overline text-grey-7" label="Olvide mi contraseña" :to="{path: '/auth/recoveryPassword'}" flat dense/>
                 <q-btn type="submit" rounded="" class="full-width q-mt-lg" color="dark" label="Iniciar sesión"/>
             </q-form>
         </q-card>

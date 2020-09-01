@@ -6,9 +6,16 @@
             <div v-if="msg_err">
                 <q-chip color="red-10" text-color="white" icon="warning" :label="msg_err" />
             </div>
-            <q-form class="q-pa-sm text-right">
+            <q-form class="q-pa-sm text-center">
                 <q-input outlined v-model="form.nick" label="Usuario" color="black" required />
-                <q-btn type="submit" rounded class="full-width q-mt-lg" color="dark" label="Enviar solicitud"/>
+                <div class="row q-mt-lg">
+                    <div class="col-3">
+                        <q-btn rounded color="grey-8" icon="arrow_left" :to="{path: '/auth'}" />
+                    </div>
+                    <div class="col-9">
+                        <q-btn type="submit" rounded class="full-width" color="dark" label="Enviar solicitud"/>
+                    </div>
+                </div>
             </q-form>
         </q-card>
         <q-card flat v-if="success">
