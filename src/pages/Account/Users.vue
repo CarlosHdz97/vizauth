@@ -1,68 +1,44 @@
 <template>
     <q-page>
-        <div class="row q-col-gutter-md justify-center">
-            <q-toolbar class="col-12 bg-grey-2 shadow-2">
-                <q-btn flat color="black" icon="apps" />
-                <q-toolbar-title>
-                    <q-input v-model="form.search" color="black" label="Buscar por nombre" class="text-center" borderless />
-                </q-toolbar-title>
-                <!-- <q-btn flat color="grey-4" icon="filter_alt" @click="filter = true"/> -->
-            </q-toolbar>
-            <div class="col-11" v-for="account in accounts" :key="account.id">
-                <q-card>
-                    <q-card-section horizontal>
-                        <q-card-section class="flex flex-center">
-                            <q-avatar color="black" text-color="white" icon="person"/>
+        <div class="row justify-center">
+            <q-table class="row q-col-gutter-sm col-12 col-md-11 justify-center" grid grid-header :data="accounts" :columns="columns" row-key="id" :filter="filter" hide-header>
+                <template v-slot:top-right>
+                    <q-input dense debounce="300" v-model="filter" placeholder="Buscar">
+                    <template v-slot:append>
+                        <q-icon name="search" />
+                    </template>
+                    </q-input>
+                </template>
+                <template v-slot:header="props">
+                    <q-tr :props="props" class="text-center">
+                        <q-th v-for="col in props.cols" :key="col.name" :props="props" class="text-bolder">
+                            {{ col.label }}
+                        </q-th>
+                    </q-tr>
+                </template>
+                <template v-slot:item="props">
+                    <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
+                    <q-card v-ripple style="cursor:pointer;">
+                        <q-card-section horizontal>
+                            <q-card-section class="flex flex-center">
+                                <q-avatar color="black" text-color="white" icon="person"/>
+                            </q-card-section>
+                            <q-item>
+                                <q-item-section>
+                                    <q-item-label class="text-subtitle2 text-weight-bolder">{{props.row.name}}</q-item-label>
+                                    <q-item-label>{{props.row.rol}}</q-item-label>
+                                    <q-item-label caption>{{props.row.status}}</q-item-label>
+                                </q-item-section>
+                            </q-item>
                         </q-card-section>
-                        <q-item>
-                            <q-item-section>
-                                <q-item-label class="text-subtitle2 text-weight-bolder">{{account.name}}</q-item-label>
-                                <q-item-label>{{account.rol}}</q-item-label>
-                                <q-item-label caption>Conectado</q-item-label>
-                            </q-item-section>
-                        </q-item>
-                    </q-card-section>
-                </q-card>
-            </div>
-        </div>
-        <div class="row justify-center q-py-md">
-            <q-pagination v-model="page" color="black" :max="10" :max-pages="6" :boundary-numbers="false"></q-pagination>
+                    </q-card>
+                    </div>
+                </template>
+            </q-table>
         </div>
         <q-page-sticky position="bottom-right" :offset="[18, 25]">
-            <q-btn fab icon="add" color="grey-9" />
+            <q-btn fab icon="add" color="grey-9" :to="{path:'/users/create'}"/>
         </q-page-sticky>
-        <!-- <q-dialog v-model="filter">
-            <q-card style="width: 300px" class="text-center q-px-sm q-pb-md">
-                <q-card-section>
-                    <div class="text-h6">Filtros</div>
-                </q-card-section>
-                <q-item tag="label" v-ripple class="row">
-                    <q-item-section avatar class="col-6">
-                        <q-toggle v-model="form.nombre[0]" label="Nombre"/>
-                    </q-item-section>
-                    <q-item-section class="col">
-                        <q-btn icon="arrow_drop_down_circle" flat/>
-                    </q-item-section>
-                </q-item>
-                <q-item tag="label" v-ripple class="row">
-                    <q-item-section avatar class="col-6">
-                        <q-toggle v-model="form.rol[0]" label="Rol"/>
-                    </q-item-section>
-                    <q-item-section class="col">
-                        <q-btn icon="filter_alt" flat/>
-                    </q-item-section>
-                </q-item>
-                <q-item tag="label" v-ripple class="row">
-                    <q-item-section avatar class="col-6">
-                        <q-toggle v-model="form.status[0]" label="Status"/>
-                    </q-item-section>
-                    <q-item-section class="col">
-                        <q-btn icon="filter_alt" flat/>
-                    </q-item-section>
-                </q-item>
-                <q-btn label="Aceptar" color="black"/>
-            </q-card>
-        </q-dialog> -->
     </q-page>
 </template>
 
@@ -72,21 +48,25 @@ export default {
   data () {
         return {
             accounts: [
-                {'id': 1, 'name': 'Carlos Hernandez', 'rol': 'root'},
-                {'id': 2, 'name': 'Eduardo Lopez', 'rol': 'root'},
-                {'id': 3, 'name': 'Ricardo', 'rol': 'Administrador'},
-                {'id': 4, 'name': 'Diego Huerta', 'rol': 'Administrador general'},
-                {'id': 5, 'name': 'Pedro', 'rol': 'Vendedor'},
-                {'id': 6, 'name': 'Nicol', 'rol': 'Cajero'},
+                {'id': 1, 'name': 'Carlos Hernandez', 'rol': 'root', 'status': 'conectado'},
+                {'id': 2, 'name': 'Eduardo Lopez', 'rol': 'root', 'status': 'conectado'},
+                {'id': 3, 'name': 'Ricardo', 'rol': 'Administrador', 'status': 'conectado'},
+                {'id': 4, 'name': 'Diego Huerta', 'rol': 'Administrador general', 'status': 'conectado'},
+                {'id': 5, 'name': 'Pedro', 'rol': 'Vendedor', 'status': 'conectado'},
+                {'id': 6, 'name': 'Nicol', 'rol': 'Cajero', 'status': 'conectado'},
+                {'id': 1, 'name': 'Carlos Hernandez', 'rol': 'root', 'status': 'conectado'},
+                {'id': 2, 'name': 'Eduardo Lopez', 'rol': 'root', 'status': 'conectado'},
+                {'id': 3, 'name': 'Ricardo', 'rol': 'Administrador', 'status': 'conectado'},
+                {'id': 4, 'name': 'Diego Huerta', 'rol': 'Administrador general', 'status': 'conectado'},
+                {'id': 5, 'name': 'Pedro', 'rol': 'Vendedor', 'status': 'conectado'},
+                {'id': 6, 'name': 'Nicol', 'rol': 'Cajero', 'status': 'conectado'},
             ],
-            form: {
-                search : '',
-                nombre : [false, ''],
-                rol :[false, ''],
-                status :[false, ''],
-            },
-            page: 1,
-            filter:false
+            filter: '',
+            columns: [
+                {name: 'name', required: true, label: 'Nombre', align: 'left', field: row =>row.name, sortable: true},
+                {name: 'rol', required: true, label: 'Rol', align: 'left', field: row =>row.rol, sortable: true},
+                {name: 'status', required: true, label: 'status', align: 'left', field: row =>row.status, sortable: true},
+            ]
         }
     }
 }

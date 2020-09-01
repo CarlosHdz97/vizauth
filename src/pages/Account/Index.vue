@@ -40,6 +40,7 @@ export default {
                 {'name': 'Etiquetas', 'icon': 'local_offer', 'color': 'light-green-1', 'text': 'light-green-9', 'path': '/labels'},
                 {'name': 'Preventa', 'icon': 'shopping_bag', 'color': 'teal-1', 'text': 'teal-9', 'path': '/preSale'},
                 {'name': 'Punto de venta', 'icon': 'store', 'color': 'orange-1', 'text': 'orange-10', 'path': '/sale'},
+                {'name': 'Reportes', 'icon': 'analytics', 'color': 'purple-1', 'text': 'purple-10', 'path': '/dashboard'},
             ],
             workpoints: [
                 {'id': 1, 'name': 'CEDIS SAN PABLO'},
