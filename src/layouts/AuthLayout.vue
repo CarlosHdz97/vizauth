@@ -7,12 +7,21 @@
 </template>
 
 <script>
-
+import auth from "../api/auth";
 export default {
   name: 'AuthLayout',
+  created (){
+    this.init()
+  },
   data () {
     return {
       isConfig: false,
+    }
+  },
+  methods :{ 
+    init () {
+      console.log('----')
+      auth.a()
     }
   }
 }
